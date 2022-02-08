@@ -1,5 +1,23 @@
 $(document).ready(function () {
 
+    var skip = 4;
+    $(document).on('scroll', '#products', function () {
+        $.ajax({
+            type: "GET",
+            url: "/Products/Load?skip=" + skip,
+            success: function (res) {
+
+                $("#productRow").append(res);
+                skip += 4;
+
+                var productsCount = $("#productsCount").val();
+
+                if (skip >= productsCount) {
+                    $("#loadMore").remove();
+                }
+            }
+        });
+    });
     // HEADER
 
     $(document).on('click', '#search', function () {
