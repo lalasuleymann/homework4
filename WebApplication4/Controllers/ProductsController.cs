@@ -22,9 +22,9 @@ namespace WebApplication4.Controllers
         public IActionResult Index()
         {
             ViewBag.ProductsCount = _productsCount;
-            var products = _dbContext.Products.Include(x => x.Category).Take(4).ToList();
+            //var products = _dbContext.Products.Include(x => x.Category).Take(4).ToList();
 
-            return View(products);
+            return View(/*products*/);
         }
 
         public IActionResult Load(int skip)

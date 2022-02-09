@@ -23,7 +23,7 @@ namespace WebApplication4.Controllers
             var sliderImage = _dbContext.SliderImages.ToList();
             var slider = _dbContext.Sliders.SingleOrDefault();
             var categories = _dbContext.Categories.ToList();
-            var products = _dbContext.Products.Include(x => x.Category).ToList();
+            //var products = _dbContext.Products.Include(x => x.Category).ToList();
             var about = _dbContext.Abouts.SingleOrDefault();
             var aboutImage = _dbContext.AboutImages.SingleOrDefault();
             var suggestions = _dbContext.Suggestions.ToList();
@@ -39,7 +39,7 @@ namespace WebApplication4.Controllers
                 SliderImages = sliderImage,
                 Sldier = slider,
                 Categories = categories,
-                Products = products,
+                //Products = products,
                 About = about,
                 AboutImages = aboutImage,
                 Suggestions = suggestions,

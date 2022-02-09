@@ -28,6 +28,7 @@ namespace WebApplication4.DataAccessLayer
         public DbSet<BlogItem> BlogItems { get; set; }
         public DbSet<Carousel> Carousels { get; set; }
         public DbSet<Social> Socials { get; set; }
+        public DbSet<Bio> Bios { get; set; }
 
     }
 }

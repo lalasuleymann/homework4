@@ -283,3 +283,10 @@ C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\WebAp
 C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\WebApplication4.genruntimeconfig.cache
 C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\WebApplication4.csproj.CopyComplete
 C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Views\Shared\_ProductPartial.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Views\Products\Index.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Views\Shared\Components\Product\Default.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Views\Shared\Components\Footer\Default.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Views\Shared\Components\Header\Default.cshtml.g.cs
