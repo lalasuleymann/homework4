@@ -290,3 +290,10 @@ C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor
 C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Views\Shared\Components\Product\Default.cshtml.g.cs
 C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Views\Shared\Components\Footer\Default.cshtml.g.cs
 C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Views\Shared\Components\Header\Default.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\Shared\_AdminLayout.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\_ViewImports.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\_ViewStart.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\Dashboard\Index.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\Category\Index.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\Category\Details.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\Category\Create.cshtml.g.cs

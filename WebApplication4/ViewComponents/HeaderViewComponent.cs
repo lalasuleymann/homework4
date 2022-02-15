@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication4.DataAccessLayer;
+using WebApplication4.ViewModels;
 
 namespace WebApplication4.ViewComponents
 {
@@ -15,9 +18,17 @@ namespace WebApplication4.ViewComponents
         {
             _dbContext = dbContext;
         }
-        public async Task<IViewComponentResult> InvokeAsync() 
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            var bio = _dbContext.Bios.SingleOrDefault();
+            var count = 0;
+            var basket = Request.Cookies["basket"];
+            if (!string.IsNullOrEmpty(basket))
+            {
+                var products = JsonConvert.DeserializeObject<List<BasketViewModel>>(basket);
+                count = products.Count;
+            }
+            ViewBag.BasketCOunt = count;
+            var bio = await _dbContext.Bios.SingleOrDefaultAsync();
             return View(bio);
         }
     }

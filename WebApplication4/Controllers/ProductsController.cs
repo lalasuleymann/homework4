@@ -35,7 +35,7 @@ namespace WebApplication4.Controllers
                 return BadRequest();
             }
 
-            var products = _dbContext.Products.Include(x => x.Category).Skip(skip).Take(4).ToList();
+            var products = _dbContext.Products.Include(x => x.Category).Skip(skip).Take(6).ToList();
 
             return PartialView("_ProductPartial", products);
         }

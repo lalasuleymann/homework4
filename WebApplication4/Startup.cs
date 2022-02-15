@@ -24,6 +24,11 @@ namespace WebApplication4
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession(options => 
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(1);
+            });
+
             var connectionString = _configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<AppDbContext>(options =>
             {
@@ -42,9 +47,11 @@ namespace WebApplication4
 
             app.UseRouting();
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(name: "areas", pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
