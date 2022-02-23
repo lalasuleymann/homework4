@@ -7,8 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication4.Areas.AdminPanel.Data;
 using WebApplication4.DataAccessLayer;
 
 namespace WebApplication4
@@ -16,10 +18,12 @@ namespace WebApplication4
     public class Startup
     {
         private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _environment;
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             _configuration = configuration;
+            _environment = environment;
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -35,7 +39,9 @@ namespace WebApplication4
                 options.UseSqlServer(connectionString);
             });
 
-            services.AddMvc();
+            services.AddMvc().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            Constants.ImageFolderPath = Path.Combine(_environment.WebRootPath, "img");
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
