@@ -18,7 +18,6 @@ namespace WebApplication4.Areas.AdminPanel.Data
         {
             return file.Length < mb * 1024 * 1000;
         }
-
         public static async Task<string> GenetareFile(this IFormFile file, string folderPath) 
         {
             var fileName = $"{Guid.NewGuid()}-{file.FileName}";

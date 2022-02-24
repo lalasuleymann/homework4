@@ -30,36 +30,36 @@ namespace WebApplication4.Areas.AdminPanel.Controllers
             return View(expertImages);
         }
 
-        public IActionResult Create() 
-        {
-            return View();
-        }
+        //public IActionResult Create() 
+        //{
+        //    return View();
+        //}
 
-        public async Task<IActionResult> Create(ExpertsImage expertsImage) 
-        {
-            if (!ModelState.IsValid)
-                return View();
+        //public async Task<IActionResult> Create(ExpertsImage expertsImage) 
+        //{
+        //    if (!ModelState.IsValid)
+        //        return View();
 
-            if (expertsImage.Photo.IsImage()) 
-            {
-                ModelState.AddModelError("Photo", "File should be Image");
-                return View();
-            }
+        //    if (expertsImage.Photo.IsImage()) 
+        //    {
+        //        ModelState.AddModelError("Photo", "File should be Image");
+        //        return View();
+        //    }
 
-            if (expertsImage.Photo.IsAllowedSize(1))
-            {
-                ModelState.AddModelError("Photo", "File should not be Bigger than 1Mb");
-                return View();
-            }
+        //    if (expertsImage.Photo.IsAllowedSize(1))
+        //    {
+        //        ModelState.AddModelError("Photo", "File should not be Bigger than 1Mb");
+        //        return View();
+        //    }
 
-            var fileName = await expertsImage.Photo.GenetareFile(Constants.ImageFolderPath);
+        //    var fileName = await expertsImage.Photo.GenetareFile(Constants.ImageFolderPath);
 
-            expertsImage.Name = fileName;
-            await _dbContext.ExpertsImages.AddAsync(expertsImage);
-            await _dbContext.SaveChangesAsync();
+        //    expertsImage.Name = fileName;
+        //    await _dbContext.ExpertsImages.AddAsync(expertsImage);
+        //    await _dbContext.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));
-        }
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         public async Task<IActionResult> Update(int? id) 
         {
@@ -150,6 +150,35 @@ namespace WebApplication4.Areas.AdminPanel.Controllers
 
             _dbContext.ExpertsImages.Remove(existExpertImage);
             await _dbContext.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Create(ExpertsImage expertsImage)
+        {
+            if (!ModelState.IsValid)
+                return View();
+            foreach (var photo in expertsImage.Photos)
+            {
+            if (photo.IsImage())
+            {
+                ModelState.AddModelError("Photo", $"{photo.FileName} - File should be Image");
+                return View();
+            }
+
+            if (photo.IsAllowedSize(1))
+            {
+                ModelState.AddModelError("Photo", $"{photo.FileName} - File should not be Bigger than 1Mb");
+                return View();
+            }
+
+            var fileName = await photo.GenetareFile(Constants.ImageFolderPath);
+
+                var newExpertImage = new ExpertsImage { Name = fileName };
+                await _dbContext.ExpertsImages.AddAsync(newExpertImage);
+                await _dbContext.SaveChangesAsync();
+            }
+
+
             return RedirectToAction(nameof(Index));
         }
     }

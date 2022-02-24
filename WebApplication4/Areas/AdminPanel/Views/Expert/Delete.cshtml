@@ -1,22 +1,23 @@
 ﻿@model ExpertsImage
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Delete";
 }
 
+
 <div class="row">
-    <div class="col-md-6 grid-margin stretch-card">
+    <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Delete Expert Image</h4>
-                <img src="`/img/@Model.Name" style="width : 150px; height : 150px;" />
-                <p class="text-danger"> Sure to Delete?</p>
+                <img src="~/img/@Model.Image" style="width : 150px; height : 150px;" />
+                <p class="text-danger mt-3"> Sure to Delete?</p>
             </div>
         </div>
     </div>
 </div>
-<div class="row">
+<div class="row col-12 ml-2">
     <form method="post" class="forms-sample">
         <button type="submit" class="btn btn-danger">Delete</button>
     </form>
-    <a class="btn btn-light" asp-action="index">Cancal</a>
+    <a class="btn btn-light ml-1" asp-action="Index">Cancel</a>
 </div>

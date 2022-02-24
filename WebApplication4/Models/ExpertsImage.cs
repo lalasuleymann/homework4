@@ -16,7 +16,10 @@ namespace WebApplication4.Models
         public string Profession { get; set; }
 
         [NotMapped]
-        [Required]
         public IFormFile Photo { get; set; }
+
+        [NotMapped]
+        [Required]
+        public IFormFile[] Photos { get; set; }
     }
 }

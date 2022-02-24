@@ -305,3 +305,4 @@ C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor
 C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\Expert\Create.cshtml.g.cs
 C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\Expert\Update.cshtml.g.cs
 C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\Expert\Delete.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\Shared\_ValidationPartial.cshtml.g.cs

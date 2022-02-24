@@ -1,14 +1,14 @@
 ﻿@model ExpertsImage
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Update";
 }
 
 <div class="row">
-    <div class="col-md-6 grid-margin stretch-card">
+    <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Update Expert Image</h4>
-                <img src="`/img/@Model.Name" style="width : 150px; height : 150px;"/>
+                <img src="~/img/@Model.Image" style="width : 150px; height : 150px;"/>
                 <form class="forms-sample mt-2" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label asp-for="Photo">Photo</label>

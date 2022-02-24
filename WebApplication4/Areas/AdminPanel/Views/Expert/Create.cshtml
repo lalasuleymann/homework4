@@ -4,15 +4,18 @@
 }
 
 <div class="row">
-    <div class="col-md-6 grid-margin stretch-card">
+    <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Create Expert Image</h4>
                 <form class="forms-sample" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label asp-for="Photo">Photo</label>
-                        <input class="form-control" placeholder="Photo" asp-for="Photo" accept="image/*">
-                        <span asp-validation-for="Photo" class="text-danger"></span>
+                        @*<label asp-for="Photo">Photo</label>
+                            <input class="form-control" placeholder="Photo" asp-for="Photo" accept="image/*">
+                            <span asp-validation-for="Photo" class="text-danger"></span>*@
+                        <label asp-for="Photos">Photos</label>
+                        <input class="form-control" placeholder="Photos" asp-for="Photos" accept="image/*">
+                        <span asp-validation-for="Photos" class="text-danger"></span>
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
                     <a class="btn btn-light" asp-action="Index">Cancel</a>
@@ -21,3 +24,7 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationPartial" />
+}
