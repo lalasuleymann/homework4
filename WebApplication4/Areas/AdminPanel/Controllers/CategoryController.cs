@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using WebApplication4.Models;
 namespace WebApplication4.Areas.AdminPanel.Controllers
 {
     [Area("AdminPanel")]
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly AppDbContext _dbContext;
@@ -19,6 +21,7 @@ namespace WebApplication4.Areas.AdminPanel.Controllers
             _dbContext = dbContext;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var categories = await _dbContext.Categories.ToListAsync();
