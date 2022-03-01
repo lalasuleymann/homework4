@@ -9,7 +9,6 @@ using WebApplication4.Data;
 namespace WebApplication4.Areas.AdminPanel.Controllers
 {
     [Area("AdminPanel")]
-    [Authorize(Roles = RoleConstants.AdminRole)]
     public class DashboardController : Controller
     {
         public IActionResult Index()

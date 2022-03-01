@@ -327,3 +327,11 @@ C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\bin\Debug\net5.0\ru\Mi
 C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\bin\Debug\net5.0\tr\Microsoft.VisualStudio.Validation.resources.dll
 C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\bin\Debug\net5.0\zh-Hans\Microsoft.VisualStudio.Validation.resources.dll
 C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\bin\Debug\net5.0\zh-Hant\Microsoft.VisualStudio.Validation.resources.dll
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Views\Account\ChangePassword.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Views\Account\ResetPassword.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Views\Account\AccessDenied.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\User\Index.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\User\ChangePassword.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\User\ChangeRole.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\User\UserStatus.cshtml.g.cs
+C:\Users\lasly\OneDrive\Desktop\homework4\WebApplication4\obj\Debug\net5.0\Razor\Areas\AdminPanel\Views\User\Details.cshtml.g.cs

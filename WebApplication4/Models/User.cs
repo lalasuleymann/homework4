@@ -11,5 +11,8 @@ namespace WebApplication4.Models
     {
         [Required]
         public string FullName { get; set; }
+
+        [Required, EmailAddress, DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
     }
 }

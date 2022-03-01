@@ -33,5 +33,6 @@ namespace WebApplication4.DataAccessLayer
         public DbSet<Carousel> Carousels { get; set; }
         public DbSet<Social> Socials { get; set; }
         public DbSet<Bio> Bios { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

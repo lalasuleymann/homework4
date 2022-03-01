@@ -23,6 +23,6 @@ namespace WebApplication4.ViewModels
         public List<BlogItem> BlogItems { get; set; }
         public List<Carousel> Carousels { get; set; }
         public List<Social> Socials { get; set; }
-
+        public List<User> Users { get; set; }
     }
 }

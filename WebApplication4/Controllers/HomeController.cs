@@ -40,6 +40,7 @@ namespace WebApplication4.Controllers
             var blogItem = _dbContext.BlogItems.ToList();
             var carousel = _dbContext.Carousels.ToList();
             var social = _dbContext.Socials.ToList();
+            var user = _dbContext.Users.ToList();
             return View( new HomeViewModel 
             {
                 SliderImages = sliderImage,
@@ -55,7 +56,8 @@ namespace WebApplication4.Controllers
                 BlogTitle = blogTitle,
                 BlogItems = blogItem,
                 Carousels = carousel,
-                Socials = social
+                Socials = social,
+                Users = user
             });
         }
         public async Task<IActionResult> Basket() 

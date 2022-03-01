@@ -59,10 +59,24 @@ namespace WebApplication4.Controllers
                 }
                 return View();
             }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult ChangePassword() 
+        {
+            return View();
+        }
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> ChangePassword(AccountViewModel account) 
+        {
+            var user = await _userManager.FindByEmailAsync(account.Email);
+            if (user == null)
+                return BadRequest();
 
             string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-            string link = Url.Action(nameof(Verify), "Account", new { email = user.Email, token }, Request.Scheme, Request.Host.ToString());
+            string link = Url.Action(nameof(ResetPassword), "Account", new { email = user.Email, token }, Request.Scheme, Request.Host.ToString());
 
             MailMessage msg = new MailMessage();
             msg.From = new MailAddress("codep320@gmail.com", "Fiorello");
@@ -74,8 +88,8 @@ namespace WebApplication4.Controllers
                 body = reader.ReadToEnd();
             }
 
-            msg.Body = body.Replace("{{link}}", link);
-            msg.Subject = "Verify";
+            msg.Body = $"<a href= \"{link}\">Click for Reset Password</a>";
+            msg.Subject = "ResetPassword";
             msg.IsBodyHtml = true;
 
             SmtpClient smtp = new SmtpClient();
@@ -84,27 +98,56 @@ namespace WebApplication4.Controllers
             smtp.EnableSsl = true;
             smtp.Credentials = new NetworkCredential("codep320@gmail.com", "codeacademyp320");
             smtp.Send(msg);
-            TempData["confirm"] = true;
-
 
             return RedirectToAction("Index", "Home");
         }
 
-        public async Task<IActionResult> Verify(string email, string token)
+        public async Task<IActionResult> ResetPassword(string email, string token) 
         {
-
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
                 return BadRequest();
-
-            await _userManager.ConfirmEmailAsync(user, token);
-            await _signInManager.SignInAsync(user, true);
-
-            TempData["confirmed"] = true;
-
-            return RedirectToAction("Index", "Home");
+            var account = new AccountViewModel()
+            {
+                Token = token,
+            };
+            return View(account);
         }
 
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+
+        public async Task<IActionResult> ResetPassword(AccountViewModel account) 
+        {
+            if (!ModelState.IsValid)
+                return View(account);
+
+            var user = _userManager.FindByEmailAsync(account.Email);
+            if (user == null)
+                return NotFound();
+
+            var user1 = new User
+            {
+                Email = account.Email,
+                UserName = account.Username,
+                FullName = account.Fullname
+            };
+
+            var result = await _userManager.ResetPasswordAsync(user1, account.Token, account.Password);
+            if (!result.Succeeded) 
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(account);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        public IActionResult AccessDenied() 
+        {
+            return View();
+        }
         public IActionResult Login() 
         {
             return View();
