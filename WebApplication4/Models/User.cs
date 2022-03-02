@@ -14,5 +14,9 @@ namespace WebApplication4.Models
 
         [Required, EmailAddress, DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        [Required]
+        public bool IsActive { get; set; } = true;
+
     }
 }

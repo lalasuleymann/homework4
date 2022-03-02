@@ -7,6 +7,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using WebApplication4.Areas.AdminPanel.ViewModels;
+using WebApplication4.Data;
 using WebApplication4.DataAccessLayer;
 using WebApplication4.Models;
 using WebApplication4.ViewModels;
@@ -18,12 +20,13 @@ namespace WebApplication4.Areas.AdminPanel.Controllers
 
         private readonly AppDbContext _dbContext;
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-
-        public UserController(AppDbContext dbContext, UserManager<User> userManager)
+        public UserController(AppDbContext dbContext, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             _dbContext = dbContext;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         [Area("AdminPanel")]
@@ -40,91 +43,109 @@ namespace WebApplication4.Areas.AdminPanel.Controllers
 
             return View(users);
         }
-        public IActionResult ChangePassword()
+        public async Task<IActionResult> ChangePassword(string id)
         {
+            var existUser = await _userManager.FindByIdAsync(id);
+            if (existUser == null)
+                return NotFound();
+
             return View();
         }
 
         [HttpPost]
-        [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> ChangePassword(AccountViewModel account)
-        {
-            var user = await _userManager.FindByEmailAsync(account.Email);
-            if (user == null)
-                return BadRequest();
-
-            string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-
-            string link = Url.Action(nameof(ResetPassword), "Account", new { email = user.Email, token }, Request.Scheme, Request.Host.ToString());
-
-            MailMessage msg = new MailMessage();
-            msg.From = new MailAddress("codep320@gmail.com", "Fiorello");
-            msg.To.Add(user.Email);
-
-            string body = string.Empty;
-            using (StreamReader reader = new StreamReader("wwwroot/assets/template/verifyemail.html"))
-            {
-                body = reader.ReadToEnd();
-            }
-
-            msg.Body = $"<a href= \"{link}\">Click for Reset Password</a>";
-            msg.Subject = "ResetPassword";
-            msg.IsBodyHtml = true;
-
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com";
-            smtp.Port = 587;
-            smtp.EnableSsl = true;
-            smtp.Credentials = new NetworkCredential("codep320@gmail.com", "codeacademyp320");
-            smtp.Send(msg);
-
-            return RedirectToAction("Index", "Home");
-        }
-        public async Task<IActionResult> ResetPassword(string email, string token)
-        {
-            var user = await _userManager.FindByEmailAsync(email);
-            if (user == null)
-                return BadRequest();
-            var account = new AccountViewModel()
-            {
-                Token = token,
-            };
-            return View(account);
-        }
-
-        [HttpPost]
-        [AutoValidateAntiforgeryToken]
-
-        public async Task<IActionResult> ResetPassword(AccountViewModel account)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(string id, ChangePasswordViewModel changePasswordViewModel)
         {
             if (!ModelState.IsValid)
-                return View(account);
+            {
+                ModelState.AddModelError("", "Invalid Credential");
+                return View(changePasswordViewModel);
+            }
 
-            var user = _userManager.FindByEmailAsync(account.Email);
+            var user = await _userManager.FindByIdAsync(id);
             if (user == null)
                 return NotFound();
 
-            var user1 = new User
-            {
-                Email = account.Email,
-                UserName = account.Username,
-                FullName = account.Fullname
-            };
+            var isCurrentPassword = await _userManager.CheckPasswordAsync(user, changePasswordViewModel.CurrentPassword);
+            if (!isCurrentPassword)
+                return BadRequest();
 
-            var result = await _userManager.ResetPasswordAsync(user1, account.Token, account.Password);
+            var result = await _userManager.ChangePasswordAsync(user, changePasswordViewModel.CurrentPassword, changePasswordViewModel.Password);
             if (!result.Succeeded)
             {
-                foreach (var error in result.Errors)
+                foreach (var item in result.Errors)
                 {
-                    ModelState.AddModelError("", error.Description);
+                    ModelState.AddModelError("", item.Description);
+                    return View();
                 }
-                return View(account);
             }
-            return RedirectToAction("Index", "Home");
+
+            return RedirectToAction("Index");
         }
-        public IActionResult AccessDenied()
+
+        public async Task<IActionResult> ChangeRole(string id)
         {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+                return NotFound();
+
+            var roles = await _userManager.GetRolesAsync(user);
+            ViewBag.CurrentRoleName = roles.FirstOrDefault();
+
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangeRole(string id, ChangeRoleViewModel changeRoleViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Invalid Credential");
+                return View(changeRoleViewModel);
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+                return NotFound();
+
+            var currentRole = await _userManager.GetRolesAsync(user);
+            foreach (var item in currentRole)
+            {
+                await _userManager.RemoveFromRoleAsync(user, item);
+            }
+
+            var newRole = _roleManager.Roles.FirstOrDefault(x => x.Id == changeRoleViewModel.RoleId);
+            if (newRole == null)
+            {
+                ModelState.AddModelError("", "Choose correct Role");
+                return View(changeRoleViewModel);
+            }
+
+            var result = await _userManager.AddToRoleAsync(user, newRole.Name);
+            if (!result.Succeeded)
+            {
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError("", item.Description);
+                }
+                return View(changeRoleViewModel);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> ChangeStatus(string id, bool status)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+                return NotFound();
+
+            user.IsActive = !status;
+
+            await _userManager.UpdateAsync(user);
+
+            return RedirectToAction("Index");
         }
     }
 }

@@ -22,10 +22,9 @@
                                 <tr>
                                     <td>@item.FullName</td>
                                     <td>
-                                        <a class="btn btn-success" asp-controller="User" asp-action="Details" asp-route-id="@item.Id">Details</a>
                                         <a class="btn btn-dark" asp-controller="User" asp-action="ChangePassword" asp-route-id="@item.FullName">Change Password</a>
                                         <a class="btn btn-dark" asp-controller="User" asp-action="ChangeRole" asp-route-id="@item.FullName">Change Role</a>
-                                        <a class="btn btn-dark" asp-controller="User" asp-action="UserStatus" asp-route-id="@item.FullName">User Status</a>
+                                        <a class="btn btn-dark" asp-controller="User" asp-action="ChangeStatus" asp-route-id="@item.FullName">User Status</a>
                                     </td>
                                 </tr>
                             }
